@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Rehena</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/bootstrap-datepicker.standalone.min.css">
+</head>
+
+<header>
+	<img class="logo" src="/img/logo.png" width="93px" height="106.66px">
+	<nav class="navbar navbar-defaut navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header"></div>
+		</div>
+
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="/home">Home</a></li>
+			<li role="presentation"><a href="/casadeshow">Casas de Show</a></li>
+			<li role="presentation"><a href="/eventos">Eventos</a></li>
+			<li role="presentation"><a href="/historico">Histórico</a></li>
+		</ul>
+
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sn-10">
+				<button type="button"
+					style="position: absolute; left: 63%; top: 18%;"
+					onclick="window.location.href='/Usuarios/novo'"
+					class="btn btn-primary">CADASTRAR</button>
+				<button type="button"
+					style="position: absolute; left: 70%; top: 18%;"
+					onclick="window.location.href='/logins'" class="btn btn-primary">LOGIN</button>
+			</div>
+		</div>
+	</nav>
+</header>
+<form class="form-horizontal" action="/home" th:object="${evento}">
+	<div class="panel panel-evento panel-defaut">
+		<div class="panel heading">
+			<div class="clearfix">
+				<h3 style="padding-top: 1%; padding-bottom: 1%;"
+					class="panel-title panel-evento" align="center">REHENA - Home</h3>
+			</div>
+		</div>
+		<div class="card" th:each="evento : ${eventos}">
+			<div class="card-body">
+				<h2 class="card-title" align="center" th:text="${evento.Nomeevento}"></h2>
+				<h4 class="text-center" th:text="${evento.talento}"></h4>
+				<h4 class="text-center"
+					th:text="|Data do evento : ${{evento.data}}|"></h4>
+				<h4 class="text-center"
+					th:text="|Ingressos disponiveis: ${evento.ingressosd}|"></h4>
+				<h4 class="text-center" th:text="${evento.local.nome}"></h4>
+				<h4 class="text-center" th:if="${evento.grat}"
+					th:text="|R$: ${evento.preco}|"></h4>
+				<h4 class="text-center" th:unless="${evento.grat}">Gratuito</h4>
+				<h4 class="text-center">
+					<a class="btn btn-primary"
+						th:href="@{/compra/{id}(id=${evento.Id})}">COMPRAR</a>
+				</h4>
+			</div>
+		</div>
+	</div>
+</form>
+
+</html>

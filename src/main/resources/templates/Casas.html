@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Rehena</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/bootstrap-datepicker.standalone.min.css">
+<script src="https://kit.fontawesome.com/f74c7b4a9f.js"
+	crossorigin="anonymous"></script>
+</head>
+
+<header>
+	<img class="logo" src="/img/logo.png" width="93px" height="106.66px">
+	<nav class="navbar navbar-defaut navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header"></div>
+		</div>
+
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="/home">Home</a></li>
+			<li role="presentation"><a href="/casadeshow">Casas de Show</a></li>
+			<li role="presentation"><a href="/eventos">Eventos</a></li>
+			<li role="presentation"><a href="/historico">Histórico</a></li>
+		</ul>
+	</nav>
+</header>
+
+<form action="/casadeshow" method="POST" th:object="${casa}">
+
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		<span>Evento marcado com sucesso!</span>
+	</div>
+	<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+		<div th:each="erros : ${#fields.detailedErrors()}">
+			<span th:text="${erros.message}"></span>
+		</div>
+	</div>
+
+	<div class="form-horizontal">
+		<div class="panel-heading">
+			<h3>CADASTRO DE CASA</h3>
+		</div>
+		<div class="panel-body">
+			<input type="hidden" th:field="*{id}" />
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('nome')} ? has-error">
+				<label for="Nome" class="col-sm-5 control-label">NOME DA
+					CASA</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:field="*{nome}" />
+				</div>
+			</div>
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('nome')} ? has-error">
+				<label for="dono" class="col-sm-5 control-label">DONO</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:field="*{dono}" />
+				</div>
+			</div>
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('descr')} ? has-error">
+				<div class="input-group-prepend">
+					<label for="Nome" class="descbar col-sm-5 control-label">DESCRIÇAO</label>
+				</div>
+				<textarea class="form-group descricao" th:field="*{descr}"
+					placeholder="Diga o tamanho do espaço, a quantidade de banheiros, o tipo de publico da casa, e qualquer informaçao que ache interessante para quem queira alugar a casa."
+					aria-label="textarea"></textarea>
+			</div>
+
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('preco')} ? has-error">
+				<div class="input-group-prepend">
+					<label for="peco" class="descbar col-sm-5 control-label">VALOR
+						POR NOITE</label>
+				</div>
+				<div class="col-sm-8" style="margin-left: -4%;">
+					<div class="input-group">
+						<span class="input-group-addon">$</span> <input type="text"
+							class="form-control"
+							placeholder="Valor em 0 sera considerado gratuito" name="preco"
+							aria-label="Amount (to the nearest dollar)"> <span
+							class="input-group-addon">.00</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('end')} ? has-error">
+				<label for="local" class="col-sm-5 control-label">ENDEREÇO</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" th:field="*{end}" />
+				</div>
+			</div>
+			<div class="form-group"
+				th:classappend="${#fields.hasErrors('capa')} ? has-error">
+				<label for="ingressos" class="col-sm-5 control-label">CAPACIDADE</label>
+				<div class="col-sm-8">
+					<input type="number" class="form-control" name="capa" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sn-10">
+					<button type="submit" style="margin-left: 70%;"
+						class="btn btn-primary">CADASTRAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="panel-body">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center col-md-1">ID</th>
+				<th class="text-center col-md-3">Nome</th>
+				<th class="text-center col-md-3">Endereço</th>
+				<th class="text-center col-md-2">Dono</th>
+				<th>Valor por noite</th>
+				<th>Capacidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each=" casa : ${casaaas}">
+				<td class="text-center" th:text="${casa.id}">1</td>
+				<td class="text-center" th:text="${casa.nome}"></td>
+				<td th:text="${casa.end}"></td>
+				<td th:text="${casa.dono}"></td>
+				<td th:text="${casa.preco}"></td>
+				<td th:text="${casa.capa}"></td>
+				<td class="text-center"><a class="btn-link btn-xs"
+					th:href="@{/casadeshow/editar/{id}(id=${casa.id})}"> <span
+						class="glyphicon glyphicon-pencil"></span>
+				</a></td>
+				<td class="text-center"><a class="btn btn-link btn-xs"
+					th:href="@{/casadeshow/{id}(id=${casa.id})}"> <i
+						class="fas fa-trash-alt"></i>
+				</a></td>
+			</tr>
+			<tr>
+				<td th:if="${#lists.isEmpty(casaaas)}" colspan="7">Nenhum
+					usuario encontrado</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+</html>

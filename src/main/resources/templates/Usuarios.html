@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Rehena</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/bootstrap-datepicker.standalone.min.css">
+</head>
+
+<header>
+	<img class="logo" src="/img/logo.png" width="93px" height="106.66px">
+	<nav class="navbar navbar-defaut navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header"></div>
+		</div>
+
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="/home">Home</a></li>
+			<li role="presentation"><a href="/casadeshow">Casas de Show</a></li>
+			<li role="presentation"><a href="/eventos">Eventos</a></li>
+			<li role="presentation"><a href="/historico">Histórico</a></li>
+		</ul>
+	</nav>
+</header>
+<div class="form-group" style="margin-top: 5px; margin-right: 90%;">
+	<div class="col-sm-offset-3 col-sn-10">
+		<button type="button" onclick="window.location.href='/Usuarios/novo'"
+			class="btn btn-primary">CADASTRAR</button>
+	</div>
+</div>
+<div class="panel-body">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center col-md-1">ID</th>
+				<th class="text-center col-md-3">Nome</th>
+				<th class="text-center col-md-3">email</th>
+				<th class="text-center col-md-1">Data do Evento</th>
+				<th class="text-center col-md-1">ADM</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each=" evento : ${CadastroUsuario}">
+				<td class="text-center" th:text="${evento.Id}">1</td>
+				<td class="text-center" th:text="${evento.Nome}"></td>
+				<td th:text="${evento.email}"></td>
+				<td class="text-center"
+					th:text="${#dates.format(evento.data, 'dd-MMM-yyyy')}"></td>
+				<td class="text-center" th:text="${evento.adm}"></td>
+			</tr>
+			<tr>
+				<td th:if="${#lists.isEmpty(CadastroUsuario)}" colspan="5">Nenhum
+					usuario encontrado</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+</html>

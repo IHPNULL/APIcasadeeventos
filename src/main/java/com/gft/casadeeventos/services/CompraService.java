@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gft.casadeeventos.model.Compra;
 import com.gft.casadeeventos.repository.compras;
-import com.gft.casadeeventos.services.exceptions.EventoNaoEncontradoException;
+import com.gft.casadeeventos.services.exceptions.CompraNaoEncontradaException;
 
 @Service
 public class CompraService {
@@ -23,7 +23,7 @@ public class CompraService {
 		Compra comp = comps.findById(id).get();
 
 			if (comp == null) {
-				throw new EventoNaoEncontradoException("O evento não pode ser encontrado!");
+				throw new CompraNaoEncontradaException("A compra não pode ser encontrado!");
 			}
 			return comp;
 	}

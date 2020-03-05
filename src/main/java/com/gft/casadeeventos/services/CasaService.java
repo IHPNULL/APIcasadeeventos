@@ -60,23 +60,21 @@ public class CasaService {
 	}
 
 	public List<Casa> listarOrdem() {
-		return casaa.findAll(Sort.by(Sort.Direction.ASC,"endereco"));
+		return casaa.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 	}
 
 	public List<Casa> listarOrdemDec() {
-		return casaa.findAll(Sort.by(Sort.Direction.DESC,"endereco"));
-	}	
-	
+		return casaa.findAll(Sort.by(Sort.Direction.DESC, "nome"));
+	}
+
 	public Casa buscarNome(String end) {
 		Casa casa = casaa.findByEnd(end);
 
-		if (casa==null) {
+		if (casa == null) {
 			throw new CasaNaoEncontradaException("A casa não pode ser encontrado!");
 		}
-		
+
 		return casa;
 	}
-	
-	
-	
+
 }

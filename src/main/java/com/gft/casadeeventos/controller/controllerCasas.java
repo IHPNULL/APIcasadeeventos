@@ -14,7 +14,7 @@ import com.gft.casadeeventos.model.Casa;
 import com.gft.casadeeventos.repository.casas;
 
 @Controller
-@RequestMapping("/casadeshow")
+@RequestMapping("/casas")
 public class controllerCasas {
 
 	@Autowired

@@ -15,43 +15,29 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Configuration 
+@Configuration
 @EnableSwagger2
-public class SpringFoxConfig implements WebMvcConfigurer{
-	
+public class SpringFoxConfig implements WebMvcConfigurer {
+
 	@Bean
 	public Docket apiDocket() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-					//.apis(RequestHandlerSelectors.any())
-					.apis(RequestHandlerSelectors.basePackage("com.gft.casadeeventos.resources"))
-					.paths(PathSelectors.any())
-					.build()
-				.apiInfo(apiInfo())
-				.tags(new Tag("Casa de Eventos", "Mostrar as casas."));
-		
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				// .apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.gft.casadeeventos.resources")).paths(PathSelectors.any())
+				.build().apiInfo(apiInfo()).tags(new Tag("Casa de Eventos", "Mostrar as casas."));
+
 	}
-	
+
 	public ApiInfo apiInfo() {
-		return new ApiInfoBuilder()
-				.title("Casa de Eventos API")
-				.description("API para Eventos")
-				.version("1.0")
-				.contact(new Contact("GFT", "gft.com", "gft.com"))
-				.build();
+		return new ApiInfoBuilder().title("Casa de Eventos API").description("API para Eventos").version("1.0")
+				.contact(new Contact("GFT", "gft.com", "gft.com")).build();
 	}
-	
-	
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html")
-		 .addResourceLocations("classpath:/META-INF/resources/");
-	
-		registry.addResourceHandler("/webjars/**")
-		 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
-	
-	
-	
+
 }

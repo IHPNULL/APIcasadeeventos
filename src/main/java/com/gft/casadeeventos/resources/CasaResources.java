@@ -31,67 +31,69 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/api/casas")
 public class CasaResources {
-	
+
 	@Autowired
 	private CasaService casaServ;
-	
-	@ApiOperation(value="Lista das casas.")
-	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Casa>> listar(){
+
+	@ApiOperation(value = "Lista das casas.")
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<List<Casa>> listar() {
 		return ResponseEntity.status(HttpStatus.OK).body(casaServ.listar());
 	}
 
-	@ApiOperation(value="Salvar novas casas.")
+	@ApiOperation(value = "Salvar novas casas.")
 	@PostMapping()
-	public ResponseEntity<Void> salvar (@ApiParam(name="Adicionar uma casa.", value="Adicionar uma casa a lista") @Valid @RequestBody Casa casa){
+	public ResponseEntity<Void> salvar(
+			@ApiParam(name = "Adicionar uma casa.", value = "Adicionar uma casa a lista") @Valid @RequestBody Casa casa) {
 		casa = casaServ.salvar(casa);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-					.path("/{ID}").buildAndExpand(casa.getId()).toUri();
-	
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{ID}").buildAndExpand(casa.getId()).toUri();
+
 		return ResponseEntity.created(uri).build();
 	}
-	
-	@ApiOperation(value="Buscar um casa específica.")
-	@GetMapping(value="/{ID}")
-	public ResponseEntity<Optional<Casa>> buscar(@ApiParam(value = "Buscar uma casa", example = "1")@PathVariable("ID") Long ID){
+
+	@ApiOperation(value = "Buscar um casa específica.")
+	@GetMapping(value = "/{ID}")
+	public ResponseEntity<Optional<Casa>> buscar(
+			@ApiParam(value = "Buscar uma casa", example = "1") @PathVariable("ID") Long ID) {
 		Optional<Casa> casa = casaServ.buscar(ID);
 		return ResponseEntity.status(HttpStatus.OK).body(casa);
 	}
-	
+
 	@ApiOperation(value = "Deletar um casa")
-	@DeleteMapping(value ="/{ID}")
-	public ResponseEntity<Void> deletar (@ApiParam(name="Deletar uma casa.", value="Deletar uma casa da lista.")@PathVariable("ID") Long ID) {
+	@DeleteMapping(value = "/{ID}")
+	public ResponseEntity<Void> deletar(
+			@ApiParam(name = "Deletar uma casa.", value = "Deletar uma casa da lista.") @PathVariable("ID") Long ID) {
 		casaServ.deletar(ID);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
-	
-	@ApiOperation(value="Atualizar um dado de uma casa.")
-	@PutMapping(value="/{ID}")
-	public ResponseEntity<Void> atualizar(@ApiParam(name="Atualizar uma casa.", 
-	value="Atualizar dados de uma casa.",
-	example ="1") @RequestBody Casa casa, @PathVariable("ID") Long ID) {
+
+	@ApiOperation(value = "Atualizar um dado de uma casa.")
+	@PutMapping(value = "/{ID}")
+	public ResponseEntity<Void> atualizar(
+			@ApiParam(name = "Atualizar uma casa.", value = "Atualizar dados de uma casa.", example = "1") @RequestBody Casa casa,
+			@PathVariable("ID") Long ID) {
 		casa.setId(ID);
 		casaServ.atualizar(casa);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
-	
-	@ApiOperation(value="Colocar em ordem alfabética ascendente.")
+
+	@ApiOperation(value = "Colocar em ordem alfabética ascendente.")
 	@GetMapping("/asc")
-	public ResponseEntity<List<Casa>> ordemAsc(){
+	public ResponseEntity<List<Casa>> ordemAsc() {
 		return ResponseEntity.status(HttpStatus.OK).body(casaServ.listarOrdem());
 	}
-	
-	@ApiOperation(value="Colocar em ordem alfabética descendente.")
+
+	@ApiOperation(value = "Colocar em ordem alfabética descendente.")
 	@GetMapping("/desc")
-	public ResponseEntity<List<Casa>> ordemDesc(){
+	public ResponseEntity<List<Casa>> ordemDesc() {
 		return ResponseEntity.status(HttpStatus.OK).body(casaServ.listarOrdemDec());
 	}
-	
-	@ApiOperation(value="Buscar por nome.")
+
+	@ApiOperation(value = "Buscar por nome.")
 	@GetMapping("/nome/{end}")
-	public ResponseEntity<Casa> buscarNome(@ApiParam(value = "Buscar uma casa por nome.")@PathVariable("end") String end){
+	public ResponseEntity<Casa> buscarNome(
+			@ApiParam(value = "Buscar uma casa por nome.") @PathVariable("end") String end) {
 		Casa casa = casaServ.buscarNome(end);
 		return ResponseEntity.status(HttpStatus.OK).body(casa);
 	}
 }
-

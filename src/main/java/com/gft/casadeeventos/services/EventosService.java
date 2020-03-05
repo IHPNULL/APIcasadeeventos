@@ -70,11 +70,11 @@ public class EventosService {
 	}
 
 	public List<Evento> listarCapacidadeAsc() {
-		return envents.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+		return envents.findAll(Sort.by(Sort.Direction.ASC, "ingressos"));
 	}
 
 	public List<Evento> listarCapacidadeDesc() {
-		return envents.findAll(Sort.by(Sort.Direction.DESC, "nome"));
+		return envents.findAll(Sort.by(Sort.Direction.DESC, "ingressos"));
 	}
 
 	public List<Evento> listarDataAsc() {

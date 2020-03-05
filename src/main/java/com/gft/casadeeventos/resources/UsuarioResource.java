@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gft.casadeeventos.model.Compra;
-import com.gft.casadeeventos.services.CompraService;
+import com.gft.casadeeventos.model.Usuario;
+import com.gft.casadeeventos.services.UsuarioService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-@Api(tags = "Compras")
+@Api(tags = "Usuarios")
 @RestController
-@RequestMapping("/api/compras")
-public class CompraResource {
+@RequestMapping("/api/usuarios")
+public class UsuarioResource {
 	
 	@Autowired
-	private CompraService compraServ;
+	private UsuarioService usu;
 	
-	@ApiOperation(value="Lista de compras.")
+	@ApiOperation(value="Lista de Usuarios.")
 	@RequestMapping(method = RequestMethod.GET,
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Compra>> listar(){
-		return ResponseEntity.status(HttpStatus.OK).body(compraServ.buscarHistorico());
+	public ResponseEntity<List<Usuario>> listar(){
+		return ResponseEntity.status(HttpStatus.OK).body(usu.buscarHistorico());
 	}
 	
-	@ApiOperation(value="Buscar um evento específico.")
+	@ApiOperation(value="Buscar um usuario específico.")
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Compra> buscar(@ApiParam(value = "Buscar uma compra", example = "1")@PathVariable("id") Long id){
-		Compra compra = compraServ.buscarEspecifico(id);
-		return ResponseEntity.status(HttpStatus.OK).body(compra);
+	public ResponseEntity<Usuario> buscar(@ApiParam(value = "Buscar um usuario", example = "1")@PathVariable("id") Long id){
+		Usuario user = usu.buscarEspecifico(id);
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 
 }

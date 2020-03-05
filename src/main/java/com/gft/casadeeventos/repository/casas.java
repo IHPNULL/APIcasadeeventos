@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gft.casadeeventos.model.Casa;
 
-public interface casas extends  JpaRepository<Casa, Long>{
+public interface casas extends JpaRepository<Casa, Long> {
 
 	Casa findByEnd(String end);
 }

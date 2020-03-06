@@ -36,7 +36,7 @@ public class CasaService {
 	public Optional<Casa> buscar(Long id) {
 		Optional<Casa> casa = casaa.findById(id);
 
-		if (casa.isEmpty()) {
+		if (casa.isPresent()) {
 			throw new CasaNaoEncontradaException("A casa não pode ser encontrado!");
 		}
 		return casa;

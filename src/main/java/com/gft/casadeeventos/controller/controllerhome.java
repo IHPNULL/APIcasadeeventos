@@ -26,6 +26,16 @@ public class controllerhome {
 			
 			return mv;
 		}
+		
+		@RequestMapping("/")
+		public ModelAndView homes()
+		{
+			List<Evento> eventos =  event.findAll();
+			ModelAndView mv = new ModelAndView("Home");
+			mv.addObject("eventos", eventos);
+			
+			return mv;
+		}
 	
 
 }

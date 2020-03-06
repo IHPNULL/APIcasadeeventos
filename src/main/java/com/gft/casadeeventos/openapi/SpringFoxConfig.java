@@ -22,7 +22,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 	@Bean
 	public Docket apiDocket() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				// .apis(RequestHandlerSelectors.any())
+				 .apis(RequestHandlerSelectors.any())
 				.apis(RequestHandlerSelectors.basePackage("com.gft.casadeeventos.resources")).paths(PathSelectors.any())
 				.build().apiInfo(apiInfo()).tags(new Tag("Casa de Eventos", "Mostrar as casas."));
 

@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/**").permitAll().antMatchers("/swagger-ui.html").hasAnyAuthority("USER", "ADMIN")
 				.anyRequest().authenticated()
 
-				.and().formLogin().loginPage("/logins").permitAll().defaultSuccessUrl("/", true).and().logout()
+				.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/", true).and().logout()
 				.invalidateHttpSession(true).clearAuthentication(true);
 
 	}
@@ -41,11 +41,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 		return provider;
 	}
-
-	@Override
-	public void configure(WebSecurity config) throws Exception {
-		config.ignoring().antMatchers("/css/**").antMatchers("/js/**").antMatchers("/imagens/**")
-				.antMatchers("/META-INF/resources/webjars/**").antMatchers("/csrf/**");
-	}
-
 }

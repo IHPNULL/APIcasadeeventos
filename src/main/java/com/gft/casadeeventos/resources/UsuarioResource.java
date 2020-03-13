@@ -22,20 +22,21 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioResource {
-	
+
 	@Autowired
 	private UsuarioService usu;
-	
-	@ApiOperation(value="Lista de Usuarios.")
-	@RequestMapping(method = RequestMethod.GET,
-			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Usuario>> listar(){
+
+	@ApiOperation(value = "Lista de Usuarios.")
+	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<List<Usuario>> listar() {
 		return ResponseEntity.status(HttpStatus.OK).body(usu.buscarHistorico());
 	}
-	
-	@ApiOperation(value="Buscar um usuario específico.")
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Usuario> buscar(@ApiParam(value = "Buscar um usuario", example = "1")@PathVariable("id") Long id){
+
+	@ApiOperation(value = "Buscar um usuario específico.")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Usuario> buscar(
+			@ApiParam(value = "Buscar um usuario", example = "1") @PathVariable("id") Long id) {
 		Usuario user = usu.buscarEspecifico(id);
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}

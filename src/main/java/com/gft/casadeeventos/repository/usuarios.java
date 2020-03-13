@@ -6,6 +6,6 @@ import com.gft.casadeeventos.model.Usuario;
 
 public interface usuarios extends JpaRepository<Usuario, Long> {
 
-	// Optional<Usuario> findByUsername(String username);
+	Usuario findByUsername(String username);
 
 }

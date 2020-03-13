@@ -17,29 +17,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @SuppressWarnings("deprecation")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	//List<Ingresso> ingressos =  new ArrayList<Ingresso>();
-	
-	@NotEmpty(message="Insira o nome")
+
+	// List<Ingresso> ingressos = new ArrayList<Ingresso>();
+
+	@NotEmpty(message = "Insira o nome")
 	@Size(max = 20, message = "Seu nome não pode ter mais de 100 caracteres.")
-	private String username;	
-	
-	@NotEmpty(message="Insira o email")
+	private String username;
+
+	@NotEmpty(message = "Insira o email")
 	private String email;
-	
-	@NotEmpty(message="Senha vazia")
+
+	@NotEmpty(message = "Senha vazia")
 	private String senha;
-	
-	@NotNull(message="Senhas estao diferentes")
-	@NotEmpty(message="Confirme sua senha")
+
+	@NotNull(message = "Senhas estao diferentes")
+	@NotEmpty(message = "Confirme sua senha")
 	private String confsenha;
 
 	private boolean adm;
-	
+
 	@DateTimeFormat(pattern = "dd/MM/yyy")
 	@Temporal(TemporalType.DATE)
 	private Date data = new Date();
@@ -47,59 +47,64 @@ public class Usuario {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String nome) {
 		this.username = nome;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 	public boolean isAdm() {
 		return adm;
 	}
+
 	public void setAdm(boolean adm) {
 		this.adm = adm;
 	}
+
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 	public void setConfsenha(String confsenha) {
 		this.confsenha = confsenha;
 	}
-	
-	public String getConfsenha() {			
-			return confsenha;	
+
+	public String getConfsenha() {
+		return confsenha;
 	}
 
 	/*
-	public List<Ingresso> getIng() {
-		return ingressos;
-	}
-	public void setIng(List<Ingresso> ing) {
-		this.ingressos = ing;
-	}
-	*/
-	
-	
-	
+	 * public List<Ingresso> getIng() { return ingressos; } public void
+	 * setIng(List<Ingresso> ing) { this.ingressos = ing; }
+	 */
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,6 +112,7 @@ public class Usuario {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

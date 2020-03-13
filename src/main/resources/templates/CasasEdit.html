@@ -42,7 +42,7 @@
 	</nav>
 </header>
 
-<form action="/casadeshow" method="POST" th:object="${casa}">
+<form action="/casas" method="POST" th:object="${casa}">
 
 	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 		<span>Casa cadastrada com sucesso!</span>

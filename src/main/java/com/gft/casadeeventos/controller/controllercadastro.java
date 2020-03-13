@@ -16,37 +16,34 @@ import com.gft.casadeeventos.repository.usuarios;
 @Controller
 @RequestMapping("/Usuarios")
 public class controllercadastro {
-	
-	
+
 	@Autowired
 	private usuarios user;
-	
+
 	@RequestMapping
 	public ModelAndView pesquisausuario() {
-		List<Usuario> eventos =  user.findAll();
+		List<Usuario> users = user.findAll();
 		ModelAndView mv = new ModelAndView("Usuarios");
-		mv.addObject("CadastroUsuario", eventos);
+		mv.addObject("CadastroUsuario", users);
 		return mv;
 	}
-	
-	@RequestMapping(value = "/novo",method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated Usuario User, Errors errors) {	
+
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
+	public ModelAndView salvar(@Validated Usuario User, Errors errors) {
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
 
-		
-		if(errors.hasErrors()) {
+		if (errors.hasErrors()) {
 			return mv;
-			
 		}
-		
+
 		mv.addObject(new Usuario());
-		
+
 		user.save(User);
-		
+
 		mv.addObject("mensagem", "cadastrado com sucesso");
 		return mv;
 	}
-	
+
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("CadastroUsuario");

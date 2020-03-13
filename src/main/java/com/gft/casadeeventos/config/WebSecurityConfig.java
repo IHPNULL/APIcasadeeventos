@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests()
 
 				.antMatchers("/Usuarios/novo").permitAll().antMatchers("/historico").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers("/casas").hasAuthority("ADMIN").antMatchers("/evento").hasAuthority("ADMIN")
+				.antMatchers("/casas").hasAuthority("ADMIN").antMatchers("/eventos").hasAuthority("ADMIN")
 				.antMatchers("/").hasAnyAuthority("USER", "ADMIN").antMatchers("/home").hasAnyAuthority("USER", "ADMIN")
 				.antMatchers("/api/**").permitAll().antMatchers("/swagger-ui.html").hasAnyAuthority("USER", "ADMIN")
 				.anyRequest().authenticated()
@@ -40,5 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		provider.setUserDetailsService(userDetailsService);
 		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 		return provider;
+	}
+
+	@Override
+	public void configure(WebSecurity config) throws Exception {
+		config.ignoring().antMatchers("/css/**").antMatchers("/js/**").antMatchers("/imagens/**")
+				.antMatchers("/META-INF/resources/webjars/**").antMatchers("/csrf/**");
 	}
 }

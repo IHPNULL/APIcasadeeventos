@@ -26,7 +26,7 @@ public class CasaService {
 	public Casa salvar(Casa casa) {
 		if (casa.getId() != null) {
 			Optional<Casa> a = casaa.findById(casa.getId());
-			if (a.isPresent()) {
+			if (a.isPresent()==false) {
 				throw new CasaExistenteException("Casa já existe!");
 			}
 		}
@@ -36,7 +36,7 @@ public class CasaService {
 	public Optional<Casa> buscar(Long id) {
 		Optional<Casa> casa = casaa.findById(id);
 
-		if (casa.isPresent()) {
+		if (casa.isPresent()==false) {
 			throw new CasaNaoEncontradaException("A casa não pode ser encontrado!");
 		}
 		return casa;

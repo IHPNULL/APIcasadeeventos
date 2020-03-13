@@ -2,7 +2,6 @@ package com.gft.casadeeventos;
 
 import java.util.Locale;
 
-import org.apache.catalina.security.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,9 +19,4 @@ public class CasaDeEventosApplication {
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
 	}
-
-//	protected Class<?>[] getRootConfigClasses() {
-//		return new Class[] { SecurityConfig.class };
-//	}
-
 }

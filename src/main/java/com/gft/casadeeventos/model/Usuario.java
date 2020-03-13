@@ -8,35 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@SuppressWarnings("deprecation")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// List<Ingresso> ingressos = new ArrayList<Ingresso>();
-
-	@NotEmpty(message = "Insira o nome")
-	@Size(max = 20, message = "Seu nome não pode ter mais de 100 caracteres.")
 	private String username;
 
-	@NotEmpty(message = "Insira o email")
 	private String email;
 
-	@NotEmpty(message = "Senha vazia")
-	private String senha;
-
-	@NotNull(message = "Senhas estao diferentes")
-	@NotEmpty(message = "Confirme sua senha")
-	private String confsenha;
+	private String password;
 
 	private boolean adm;
 
@@ -68,14 +54,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	public boolean isAdm() {
 		return adm;
 	}
@@ -91,19 +69,6 @@ public class Usuario {
 	public void setData(Date data) {
 		this.data = data;
 	}
-
-	public void setConfsenha(String confsenha) {
-		this.confsenha = confsenha;
-	}
-
-	public String getConfsenha() {
-		return confsenha;
-	}
-
-	/*
-	 * public List<Ingresso> getIng() { return ingressos; } public void
-	 * setIng(List<Ingresso> ing) { this.ingressos = ing; }
-	 */
 
 	@Override
 	public int hashCode() {
@@ -128,5 +93,13 @@ public class Usuario {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

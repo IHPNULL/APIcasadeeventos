@@ -27,7 +27,7 @@ public class EventosService {
 	public Evento salvar(Evento evento) {
 		if (evento.getId() != null) {
 			Optional<Evento> a = envents.findById(evento.getId());
-			if (a.isPresent()) {
+			if (a.isPresent()==false) {
 				throw new EventoExistenteException("Evento já existe!");
 			}
 		}

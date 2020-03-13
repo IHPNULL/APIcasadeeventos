@@ -8,11 +8,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @SuppressWarnings("serial")
-public class Admim implements UserDetails {
+public class Admin implements UserDetails {
 
 	private Usuario user;
 
-	public Admim(Usuario user) {
+	public Admin(Usuario user) {
 		super();
 		this.user = user;
 	}
@@ -28,7 +28,7 @@ public class Admim implements UserDetails {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return user.getSenha();
+		return user.getPassword();
 	}
 
 	@Override

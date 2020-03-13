@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.gft.casadeeventos.model.Admim;
+import com.gft.casadeeventos.model.Admin;
 import com.gft.casadeeventos.model.UserPrincipal;
 import com.gft.casadeeventos.model.Usuario;
 import com.gft.casadeeventos.repository.usuarios;
@@ -25,7 +25,7 @@ public class UsuarioDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Usuario nao encontrado");
 		}
 		if (usu.isAdm() == true) {
-			return new Admim(usu);
+			return new Admin(usu);
 		} else {
 			return new UserPrincipal(usu);
 		}

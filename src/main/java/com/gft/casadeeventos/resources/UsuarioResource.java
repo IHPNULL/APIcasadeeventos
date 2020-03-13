@@ -1,11 +1,13 @@
 package com.gft.casadeeventos.resources;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,19 +28,24 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioService usu;
 
-	@ApiOperation(value = "Lista de Usuarios.")
-	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
+	@ApiOperation(value = "Listar usuarios.")
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Usuario>> listar() {
-		return ResponseEntity.status(HttpStatus.OK).body(usu.buscarHistorico());
+		return ResponseEntity.status(HttpStatus.OK).body(usu.listarUsu());
 	}
 
 	@ApiOperation(value = "Buscar um usuario específico.")
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Usuario> buscar(
-			@ApiParam(value = "Buscar um usuario", example = "1") @PathVariable("id") Long id) {
-		Usuario user = usu.buscarEspecifico(id);
-		return ResponseEntity.status(HttpStatus.OK).body(user);
+	@GetMapping(value = "/{ID}")
+	public ResponseEntity<Optional<Usuario>> buscar(
+			@ApiParam(value = "Buscar um usuario específico.", example = "1") @PathVariable("ID") Long id) {
+		return ResponseEntity.status(HttpStatus.OK).body(usu.buscarUsuario(id));
+	}
+
+	@ApiOperation(value = "Deletar um usuário.")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deletar(@ApiParam(value = "Deletar um usuário da lista.") @PathVariable("id") Long id) {
+		usu.deletar(id);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 }

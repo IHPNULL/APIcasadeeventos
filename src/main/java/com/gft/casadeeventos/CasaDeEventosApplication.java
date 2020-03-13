@@ -21,8 +21,8 @@ public class CasaDeEventosApplication {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
 	}
 
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { SecurityConfig.class };
-	}
+//	protected Class<?>[] getRootConfigClasses() {
+//		return new Class[] { SecurityConfig.class };
+//	}
 
 }

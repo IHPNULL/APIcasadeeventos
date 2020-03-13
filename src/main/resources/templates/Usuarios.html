@@ -48,7 +48,7 @@
 		<tbody>
 			<tr th:each=" evento : ${CadastroUsuario}">
 				<td class="text-center" th:text="${evento.Id}">1</td>
-				<td class="text-center" th:text="${evento.Nome}"></td>
+				<td class="text-center" th:text="${evento.username}"></td>
 				<td th:text="${evento.email}"></td>
 				<td class="text-center"
 					th:text="${#dates.format(evento.data, 'dd-MMM-yyyy')}"></td>

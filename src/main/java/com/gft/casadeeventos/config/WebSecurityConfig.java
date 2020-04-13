@@ -25,9 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.antMatchers("/Usuarios/novo").permitAll().antMatchers("/historico").hasAnyAuthority("USER", "ADMIN")
 				.antMatchers("/casas").hasAuthority("ADMIN").antMatchers("/eventos").hasAuthority("ADMIN")
-				.antMatchers("/").hasAnyAuthority("USER", "ADMIN").antMatchers("/home").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers("/api/**").permitAll().antMatchers("/swagger-ui.html").hasAnyAuthority("USER", "ADMIN")
-				.anyRequest().authenticated()
+				.antMatchers("/home").hasAnyAuthority("USER", "ADMIN").antMatchers("/api/**").permitAll()
+				.antMatchers("/swagger-ui.html").hasAnyAuthority("USER", "ADMIN").anyRequest().authenticated()
 
 				.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/", true).and().logout()
 				.invalidateHttpSession(true).clearAuthentication(true);

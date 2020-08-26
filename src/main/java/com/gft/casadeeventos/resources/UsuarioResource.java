@@ -49,4 +49,12 @@ public class UsuarioResource {
 		usu.deletar(id);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
+
+	@Postmapping("/novo")
+	public ModelAndView salvarUsuario(Usuario users) {
+		ModelAndView mv = new ModelAndView("redirect:/login");
+		usu.save(users);
+		return mv;
+	}
+
 }

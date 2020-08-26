@@ -53,7 +53,7 @@ public class UsuarioResource {
 	@Postmapping("/novo")
 	public ModelAndView salvarUsuario(Usuario users) {
 		ModelAndView mv = new ModelAndView("redirect:/login");
-		usu.save(users);
+		usu.salvar(users.id);
 		return mv;
 	}
 

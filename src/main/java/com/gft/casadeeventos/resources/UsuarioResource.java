@@ -50,6 +50,7 @@ public class UsuarioResource {
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
+	@ApiOperation(value = "Salvar um usuario.")
 	@Postmapping("/novo")
 	public ModelAndView salvarUsuario(Usuario users) {
 		ModelAndView mv = new ModelAndView("redirect:/login");

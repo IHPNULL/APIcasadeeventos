@@ -53,6 +53,6 @@ public class UsuarioService {
 				throw new UsuarioExistenteException("Usuario já existe!");
 			}
 		}
-		return usuRepo.save(usuRepo.findById(id));
+		usuRepo.save(usuRepo.findById(id));
 	}
 }

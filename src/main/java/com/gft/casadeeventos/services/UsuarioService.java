@@ -37,4 +37,22 @@ public class UsuarioService {
 			throw new CasaNaoEncontradaException("O usuário não foi encontrada!");
 		}
 	}
+
+	public void salvar(Long id) {
+		try {
+			usuRepo.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new CasaNaoEncontradaException("O usuário não foi encontrada!");
+		}
+	}
+
+	public void salvar(Long id) {
+		if (id != null) {
+			Optional<Usuario> a = usuRepo.findById(id);
+			if (a.isPresent()) {
+				throw new UsuarioExistenteException("Usuario já existe!");
+			}
+		}
+		return usuRepo.save(usuRepo.findById(id););
+	}
 }

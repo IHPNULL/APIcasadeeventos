@@ -50,7 +50,7 @@ public class UsuarioResource {
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
-	@Postmapping("/novo")
+	@Getmapping("/novo")
 	public ModelAndView salvarUsuario(Usuario users) {
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		usu.save(usuarios);
